@@ -1,31 +1,14 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name arcaFrontEndApp
- * @description
- * # arcaFrontEndApp
- *
- * Main module of the application.
- */
-angular
-  .module('arcaFrontEndApp', [
-    'ngResource',
-    'ngRoute'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+var app = angular.module('arcaFrontEndApp', ['ngResource']);
+
+app.factory("Post", function($resource) {
+  return $resource("http://localhost:8080/entry-point/test");
+});
+
+app.controller('batchController', ['$scope', 'Post', function ($scope, Post) {
+  $scope.test = Post.query();
+}]);
+
+
+
