@@ -18,7 +18,9 @@ app.factory("Post", function($resource) {
 });
 
 app.controller('batchController', ['$scope', 'Post', function ($scope, Post) {
-  $scope.test = Post.query();
+
+  $scope.level = 30;
+  //$scope.test = Post.query();
   $scope.onClick = function () {
     // Effectuer requete vers web service
     console.log("demarrage");
@@ -26,11 +28,12 @@ app.controller('batchController', ['$scope', 'Post', function ($scope, Post) {
 }]);
 
 app.controller('tabController', ['$scope', function ($scope) {
-  $scope.lines = [{country: "Belgique", value: 190}, {country: "France", value: 180}];
+  $scope.lines = [{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180}];
 }]);
 
 app.controller("chartController", function ($scope, $timeout) {
 
+  $scope.annee = 2016;
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A', 'Series B'];
   $scope.data = [
