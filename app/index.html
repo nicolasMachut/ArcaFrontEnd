@@ -1,22 +1,56 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Arca</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css"/>
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="arcaFrontEndApp">
 
     <div class="container">
       <div class="jumbotron" ng-controller="batchController">
-        <p><button class="btn btn-primary btn-lg">Lancer le traitement</button></p>
-        {{test}}
+        <p><button ng-click="launchBatch()" class="btn btn-primary btn-lg" ng-disabled="inProgress">{{action}}</button></p>
+        <div class="progress" ng-show="inProgress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{state}}" aria-valuemin="0" aria-valuemax="100" style="width:{{state}}%">
+            {{state}}%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3" ng-controller="tabController">
+          <table class="table table-hover table-striped table-hover">
+            <th>Pays</th>
+            <th>Valeur</th>
+            <tr ng-repeat="line in lines">
+              <td>{{line.country}}</td>
+              <td>{{line.value}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-9" ng-controller="chartController">
+          <canvas id="line"
+                  class="chart chart-line" chart-data="data"
+                  chart-labels="labels" chart-legend="true"
+                  chart-series="series"chart-click="onClick">
+          </canvas>
+          <div style="text-align : center;">
+            <span class="glyphicon glyphicon-menu-left pointer" ng-click="previousYear()" aria-hidden="true" title="Année précédente"></span>
+              <span class="badge">{{year}}</span>
+            <span class="glyphicon glyphicon-menu-right pointer" ng-click="nextYear()" aria-hidden="true" title="Année suivante"></span>
+          </div>
+        </div>
       </div>
     </div>
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/angular-chart.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
