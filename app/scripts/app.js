@@ -19,9 +19,9 @@ app.factory("Post", function($resource) {
 
 app.controller('batchController', ['$scope', 'Post', function ($scope, Post) {
 
-  $scope.level = 30;
+  $scope.state = 30;
   //$scope.test = Post.query();
-  $scope.onClick = function () {
+  $scope.launchBatch = function () {
     // Effectuer requete vers web service
     console.log("demarrage");
   };

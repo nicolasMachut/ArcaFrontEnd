@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta content="utf-8" http-equiv="encoding">
-    <title></title>
+    <title>Arca</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css"/>
     <link rel="stylesheet" href="styles/main.css">
@@ -12,10 +11,10 @@
 
     <div class="container">
       <div class="jumbotron" ng-controller="batchController">
-        <p><button ng-click="onClick()" class="btn btn-primary btn-lg">Lancer le traitement</button></p>
+        <p><button ng-click="launchBatch()" class="btn btn-primary btn-lg">Lancer le traitement</button></p>
         <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{level}}" aria-valuemin="0" aria-valuemax="100" style="width: {{level}}%;">
-            {{level}}%
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{state}}" aria-valuemin="0" aria-valuemax="100" style="width:{{state}}%">
+            {{state}}%
           </div>
         </div>
       </div>
