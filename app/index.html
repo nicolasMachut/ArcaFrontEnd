@@ -40,9 +40,9 @@
                   chart-series="series"chart-click="onClick">
           </canvas>
           <div style="text-align : center;">
-            <span class="glyphicon glyphicon-menu-left pointer" aria-hidden="true" title="Année précédente"></span>
-            {{annee}}
-            <span class="glyphicon glyphicon-menu-right pointer" aria-hidden="true" title="Année suivante"></span>
+            <span class="glyphicon glyphicon-menu-left pointer" ng-click="previousYear()" aria-hidden="true" title="Année précédente"></span>
+            {{year}}
+            <span class="glyphicon glyphicon-menu-right pointer" ng-click="nextYear()" aria-hidden="true" title="Année suivante"></span>
           </div>
         </div>
       </div>
