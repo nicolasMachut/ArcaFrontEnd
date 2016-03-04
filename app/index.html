@@ -11,7 +11,29 @@
     <div class="container">
       <div class="jumbotron" ng-controller="batchController">
         <p><button class="btn btn-primary btn-lg">Lancer le traitement</button></p>
-        {{test}}
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">
+            0%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row" ng-controller="tabController">
+        <div class="col-md-3">
+          <table class="table table-hover table-striped table-hover">
+            <th>Pays</th>
+            <th>Valeur</th>
+            <tr ng-repeat="line in lines">
+              <td>{{line.country}}</td>
+              <td>{{line.value}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-9">
+          {{lines}}
+        </div>
       </div>
     </div>
 
