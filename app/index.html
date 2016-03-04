@@ -11,8 +11,8 @@
 
     <div class="container">
       <div class="jumbotron" ng-controller="batchController">
-        <p><button ng-click="launchBatch()" class="btn btn-primary btn-lg">Lancer le traitement</button></p>
-        <div class="progress">
+        <p><button ng-click="launchBatch()" class="btn btn-primary btn-lg" ng-disabled="inProgress">{{action}}</button></p>
+        <div class="progress" ng-show="inProgress">
           <div class="progress-bar" role="progressbar" aria-valuenow="{{state}}" aria-valuemin="0" aria-valuemax="100" style="width:{{state}}%">
             {{state}}%
           </div>
@@ -40,7 +40,7 @@
           </canvas>
           <div style="text-align : center;">
             <span class="glyphicon glyphicon-menu-left pointer" ng-click="previousYear()" aria-hidden="true" title="Année précédente"></span>
-            {{year}}
+              <span class="badge">{{year}}</span>
             <span class="glyphicon glyphicon-menu-right pointer" ng-click="nextYear()" aria-hidden="true" title="Année suivante"></span>
           </div>
         </div>
