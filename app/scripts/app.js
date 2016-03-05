@@ -10,6 +10,7 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
   // Configure all line charts
   ChartJsProvider.setOptions('Line', {
     datasetFill: false
+
   });
 }]);
 
@@ -21,8 +22,9 @@ app.factory("getChartsData", function($resource) {
         [65, 59, 80, 81, 56, 55, 40]
       ];
     },
+
     valuesByCountry: function () {
-      return [{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180},{country: "Belgique", value: 190}, {country: "France", value: 180}];
+      return $resource("localhost:8080/entry-point/test").get();
     }
   }
 });
@@ -49,8 +51,8 @@ app.controller('batchController', function ($scope, batchManager) {
   };
 });
 
-app.controller('tabController', function ($scope, getChartsData) {
-  $scope.lines = getChartsData.valuesByCountry();
+app.controller('tabController', function ($scope, getChartsData, $resource) {
+  $scope.lines = $resource("https://secure-caverns-39897.herokuapp.com/lines/lineByCountry").query();
 });
 
 app.controller("chartController", function ($scope, getChartsData) {
