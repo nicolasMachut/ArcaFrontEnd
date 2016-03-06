@@ -17,10 +17,8 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
 app.factory("getChartsData", function($resource) {
   return {
     statsOfTheYear: function (year){
-      return [
-        [28, 48, 40, 19, 86, 27, 90],
-        [65, 59, 80, 81, 56, 55, 40]
-      ];
+      //return $resource("https://secure-caverns-39897.herokuapp.com/lines/chart/:year", {year:year}).query()
+      return [   [65, 59]      ];
     },
 
     valuesByCountry: function () {
@@ -55,25 +53,45 @@ app.controller('tabController', function ($scope, getChartsData, $resource) {
   $scope.lines = $resource("https://secure-caverns-39897.herokuapp.com/lines/lineByCountry").query();
 });
 
-app.controller("chartController", function ($scope, getChartsData) {
+app.controller("chartController", function ($scope, getChartsData, $resource) {
 
-  $scope.year = 2016;
+  $scope.year = 2008;
 
   $scope.nextYear = function () {
     $scope.year +=1;
-    $scope.data = getChartsData.statsOfTheYear($scope.year);
+    //$scope.data = getChartsData.statsOfTheYear($scope.year);
+    var res = $resource("https://secure-caverns-39897.herokuapp.com/lines/chart/:year", {year:$scope.year}).query().$promise.then(function (result){
+      $scope.data[0] = [];
+      angular.forEach(result, function (value, key){
+        $scope.labels.push(value._id);
+        $scope.data[0].push(parseInt(value.sum));
+      })
+    });
   };
   $scope.previousYear = function () {
     $scope.year -=1;
-    $scope.data = getChartsData.statsOfTheYear($scope.year);
+    //$scope.data = getChartsData.statsOfTheYear($scope.year);
+    var res = $resource("https://secure-caverns-39897.herokuapp.com/lines/chart/:year", {year:$scope.year}).query().$promise.then(function (result){
+      $scope.data[0] = [];
+      angular.forEach(result, function (value, key){
+        $scope.labels.push(value._id);
+        $scope.data[0].push(parseInt(value.sum));
+      })
+    });
   };
 
   $scope.data = getChartsData.statsOfTheYear($scope.year);
-
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-
+  $scope.labels = [];
+  $scope.series = ['Series A'];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
+
+  var res = $resource("https://secure-caverns-39897.herokuapp.com/lines/chart/:year", {year:2008}).query().$promise.then(function (result){
+    $scope.data[0] = [];
+    angular.forEach(result, function (value, key){
+      $scope.labels.push(value._id);
+      $scope.data[0].push(parseInt(value.sum));
+    })
+  });
 });
