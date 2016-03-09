@@ -1,13 +1,19 @@
 language: node_js
 node_js:
-  - '0.10.33'
+- 0.10.33
 before_script:
-  - 'export CHROME_BIN=chromium-browser'
-  - 'export DISPLAY=:99.0'
-  - 'sh -e /etc/init.d/xvfb start'
-  - 'npm install -g bower karma grunt-cli jshint'
-  - 'npm install' # install npm packages
-  - 'bower install' # install bower packages
-
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- npm install -g bower karma grunt-cli jshint
+- npm install
+- bower install
 after_script:
-  - 'grunt' # or other command for build, run tests, etc
+- grunt
+deploy:
+  provider: heroku
+  api_key:
+    secure: RxBFmuGxVMdZSj7JW29NUoGde18k07YWN08L3cNfShEnQY9hMGFIPqV1Pqnf88OOqXKeGpzSB24eJIA+oQBadGnUyDU3OgdbYlTEkgUDhv+uC44WugJo6Fesu+8pMJwbASExo7hh46VfftpvnDLYQ+LCfmIAjhj9a55LjUdt9wuhjRGxJulDFpoe75T11t9uaaMZlerxV5+PfDePMHVSyF1enUHWyp20II/Ob1b41nPj1jZ+EQ8mS30kRT+z/NG9Gq8M4lTUKuGCtlQZCoRGwZ1NQWw3V221DAuoR0qoDEScP0VyIuDb1QO9t6wWpWWaoSBxUrN7crAovWf7Kw253r7L5WGl/CXJo1C/QdGrSNStkkrgxtNL32EcOXZ9awv00B35ATo/ML80Am4aj9sS/ykzcmfwi3xE+aj+8CdVzLfhtki63D+kMutPU5vGfdYGM8pUiPiaCTEfjTIe8s4FYhP9a+jj1E6dRDOuf/ptqB/pI9ygHLbVzSFYYgWXdJk0jz7/BKAjqh/AqRQFw0j/zUH2UG6WcE6fFhWjM0GZRCoGPLaSVG1I5fU1Wuw6bHwV5RzHiR/w1XgKoxLg1rLv89tZ36AMThS33xD/ikMKR9TKP+FCz8ORqSKwaEY9EMlGwR0IS5BAEWYUTLpB0KFVQUXzKRBuo3SwA10RENlOVcg=
+  app: pacific-springs-33892
+  on:
+    repo: nicolasMachut/ArcaFrontEnd
