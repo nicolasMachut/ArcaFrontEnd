@@ -33,12 +33,14 @@
           </table>
         </div>
         <div class="col-md-9" ng-controller="chartController">
-          <p>{{graph}}</p>
-          <canvas id="line"
-                  class="chart chart-line" chart-data="data"
-                  chart-labels="labels" chart-legend="true"
-                  chart-series="series"chart-click="onClick">
-          </canvas>
+          <div class="alert alert-info" ng-show="!showChart" style="text-align : center;"><strong>Oups...</strong> Aucune donnée pour cette année</div>
+          <div ng-show="showChart">
+            <canvas id="line"
+                    class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-legend="true"
+                    chart-series="series"chart-click="onClick">
+            </canvas>
+          </div>
           <div style="text-align : center;">
             <span class="glyphicon glyphicon-menu-left pointer" ng-click="previousYear()" aria-hidden="true" title="Année précédente"></span>
               <span class="badge">{{year}}</span>
